@@ -1,5 +1,7 @@
 # StreetPass (CECD) Research Notes
 
+**Who it's for:** 3DS homebrew developers working with StreetPass / the CECD service (cecd:u / cecd:s).
+
 Notes on how the Nintendo 3DS StreetPass service (CECD) behaves from a homebrew app's point of view: service calls, mailbox layout, the HOME Menu green dot, and pitfalls. Gathered while building the VoltPass homebrew app. Written by Gate (@GateSharks).
 
 ## Status
@@ -15,7 +17,10 @@ Research notes for homebrew use. Not affiliated with or endorsed by Nintendo. Do
 - [docs/CECD.md](docs/CECD.md): service calls and states
 - [docs/MAILBOX.md](docs/MAILBOX.md): box layout, registration, outbox, HMAC
 - [docs/GREEN_DOT.md](docs/GREEN_DOT.md): unread/new flags and a safe clear
-- [docs/LESSONS.md](docs/LESSONS.md): pitfalls
+- [docs/LESSONS.md](docs/LESSONS.md): verified pitfalls (green dot, busy states, commits)
 
 ## Credits
 Parts of our approach mirror [NetPass](https://gitlab.com/3ds-netpass/netpass) (IPC layouts, state waits, SPR flow). Also 3dbrew. Thanks to those projects.
+
+## Support
+If this helped you, tips go to Gate on X: https://x.com/GateSharks
