@@ -1,6 +1,6 @@
 # cecd:s service calls
 
-We use `cecd:s` (granted to an installed CIA via its RSF, as NetPass does), falling back to `cecd:u` for .3dsx.
+We use `cecd:s` when available (requested in the CIA's RSF, as NetPass does); `cecd:u` is also listed and used otherwise.
 
 | Call | Header | What it does |
 |---|---|---|
@@ -13,7 +13,7 @@ We use `cecd:s` (granted to an installed CIA via its RSF, as NetPass does), fall
 | Start | 0x000B0040 | Resume CECD with a command |
 | Stop | 0x000C0040 | Pause CECD with a command |
 | GetCecdState | 0x000E0000 | Current daemon state |
-| OpenAndWrite | 0x00110104 | Open + write a path in one call |
+| OpenAndWrite | | Open + write a path in one call |
 | OpenAndRead | 0x00120104 | Open + read a path in one call |
 
 ## States (GetCecdState)
@@ -21,7 +21,7 @@ We use `cecd:s` (granted to an installed CIA via its RSF, as NetPass does), fall
 - **4 = searching / busy**: StreetPass activity in progress. Don't write.
 
 ## Busy error
-`0xC8A10BF0` (InvalidState / Busy) is returned when you call a write while CECD is busy. Treat it as "retry later". Don't auto-Stop CECD to force it; just check again on a later poll.
+`0xC8A10BF0` (InvalidState / Busy) is returned while CECD is busy; during a search (state 4) CECD locks the box files, so even reads of MBoxInfo can fail with it. Treat it as "retry later". Don't auto-Stop CECD to force it; just check again on a later poll.
 
 ## Commit
 Writes aren't durable until committed. SetData option 5 commits the save data; it also returns busy if CECD isn't idle, so only commit while idle.
